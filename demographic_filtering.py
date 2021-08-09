@@ -10,10 +10,10 @@ q_movies = df.copy().loc[df["vote_count"]>=m]
 
 def weighted_rating(x,m=m,C=C):
   v = x["vote_count"]
-  R = x["vote_count"]
+  R = x["vote_average"]
   return(
       (v/(v+m)*R)+(m/(v+m)*C)
   )
 q_movies["score"] = q_movies.apply(weighted_rating,axis=1)
 q_movies  = q_movies.sort_values("score",ascending=False)
-output = q_movies[["title_x","vote_average","vote_count","score"]].head(20).values.tolist()
+output = q_movies[['title', 'poster_link', 'release_date', 'runtime', 'vote_average', 'overview']].head(20).values.tolist()

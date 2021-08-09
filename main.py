@@ -2,7 +2,9 @@ from flask import Flask,jsonify,request
 from storage import all_movies,liked_movies,not_liked_movies,did_not_watch 
 from demographic_filtering import output
 from content_based import recommendation
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/get-movie")
 def get_movie():
@@ -43,7 +45,7 @@ def unliked_movie():
     }),201
 
 
-@app.route("/did_not_watch-movie",methods=["POST"])
+@app.route("/did-not-watch-movie",methods=["POST"])
 def did_not_watch_movie():
     movie = all_movies[0]
     did_not_watch.append(movie)
